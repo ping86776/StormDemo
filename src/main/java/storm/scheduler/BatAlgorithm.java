@@ -200,7 +200,7 @@ public class BatAlgorithm {
             //System.out.println(B[i]);
 //            if (Math.rint((int)B[i])<10&&Math.rint((int)B[i])>0){
                 executors.add(B[i]);
-                //System.out.println(Math.rint(B[i]));
+                System.out.println(Math.rint(B[i]));
 //            }
 
         }
