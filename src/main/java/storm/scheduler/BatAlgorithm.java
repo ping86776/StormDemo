@@ -54,7 +54,7 @@ public class BatAlgorithm {
         }
         this.ub = new int[1][D];
         for ( int i = 0; i < D; i++ ){
-            this.ub[0][i] = 5;
+            this.ub[0][i] = 10;
         }
 
         // Initialize Q and V
@@ -77,7 +77,7 @@ public class BatAlgorithm {
 
             }
             this.F[i] = objective(X[i]);
-            //System.out.println(Arrays.toString(F));
+            System.out.println("初始适应度："+F[i]);
         }
         //System.out.println(Arrays.toString(F));
         //System.out.println(F[1]);
@@ -93,16 +93,15 @@ public class BatAlgorithm {
         // Store minimum fitness and it's index.
         // B holds the best solution array[1xD]
         this.fmin = F[fmin_i];
-        System.out.println(fmin);
+        System.out.println("初始最小适应度"+fmin);
         this.B = X[fmin_i]; // (1xD)
-        System.out.println(Arrays.toString(B));
-        System.out.println(Arrays.toString(F));
+        System.out.println("初始最优解"+Arrays.toString(B));
     }
 
     private double objective(double[] X){
         double time = 0.0;
         double LB = 0.0;
-        double CPU = 2100+ (int)((3500 - 2100) * Math.random());
+        double CPU = 100+((500 - 100) * rand.nextInt(10));
         //System.out.println(CPU);
         for ( int i = 0; i < D; i++ ){
             time += D/CPU;
@@ -141,8 +140,8 @@ public class BatAlgorithm {
         double[][] S = new double[N][D];
         int n_iter = 0;
         System.out.println(fmin);
-        System.out.println(Arrays.toString(X));
-        System.out.println(Arrays.toString(B));
+//        System.out.println(Arrays.toString(X));
+//        System.out.println(Arrays.toString(B));
         System.out.println("初始的适应度"+Arrays.toString(F));
         // Loop for all iterations/generations(MAX)
         for ( int t = 0; t < MAX; t++ ){
@@ -150,12 +149,13 @@ public class BatAlgorithm {
             for ( int i = 0; i < N; i++ ){
 
                 // Update frequency (Nx1)
-                Q[i][0] = Q_MIN + (Q_MIN-Q_MAX) * Math.random();
+                Q[i][0] = Math.abs(Q_MIN + (Q_MIN-Q_MAX) * rand.nextDouble());
+                System.out.println(Q[i][0]);
                 // Update velocity (NxD)
                 for ( int j = 0; j < D; j++ ){
                     //System.out.println(X[i][j] - B[j]);
                     V[i][j] = Math.abs(V[i][j] + (X[i][j] - B[j]) * Q[i][0]);
-                    //System.out.println(Arrays.toString(V[i]));
+                    //System.out.println((X[i][j] - B[j]));
                 }
                 // Update S = X + V
                 for ( int j = 0; j < D; j++ ){
@@ -169,7 +169,7 @@ public class BatAlgorithm {
                 if ( Math.random() > R )
                     for ( int j = 0; j < D; j++ ) {
                         X[i][j] = B[j] + 0.001 * rand.nextGaussian();
-                        System.out.println(Arrays.toString(X[i]));
+                        //System.out.println(Arrays.toString(X[i]));
                     }
 
                 // Evaluate new solutions
@@ -198,10 +198,10 @@ public class BatAlgorithm {
         // executors = new HashSet();
         for (int i = 0; i <B.length ; i++) {
             //System.out.println(B[i]);
-//            if (Math.rint((int)B[i])<10&&Math.rint((int)B[i])>0){
-                executors.add(B[i]);
-                System.out.println(Math.rint(B[i]));
-//            }
+            if (Math.rint((int)B[i])<10&&Math.rint((int)B[i])>0){
+                executors.add(Math.rint((int)B[i]));
+                System.out.println(executors);
+            }
 
         }
 
@@ -211,6 +211,6 @@ public class BatAlgorithm {
     }
 
     public static void main(String[] args) {
-        new BatAlgorithm(5, 1000, 0.0, 1.0, 0.0, 1.0).startBat();
+        new BatAlgorithm(1, 1000, 0.0, 1.0, 0.0, 1.0).startBat();
     }
 }

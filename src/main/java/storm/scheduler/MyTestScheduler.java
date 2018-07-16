@@ -5,7 +5,7 @@ package storm.scheduler;
  */
 
 import java.util.*;
-import java.util.concurrent.Executor;
+import java.util.logging.SimpleFormatter;
 
 import org.apache.storm.scheduler.*;
 import org.apache.storm.scheduler.Topologies;
@@ -26,14 +26,16 @@ public class MyTestScheduler implements IScheduler{
     public void schedule (Topologies topologies, Cluster cluster){
 
         System.out.println("MyTestScheduler: begin scheduling");
-        //logger.info("MyTestScheduler");
-        //logger.info("+++++++++++++++++++++++++++");
+        logger.info("MyTestScheduler");
+        logger.info("+++++++++++++++++++++++++++");
 
         //获得拓扑的所有信息，確定Topology是否提交到集群了 topologyDetails不为null说明已经提交
         TopologyDetails topology = topologies.getByName("word_count");
         if (topology !=null){
             //topology是否需要进行调度分配,有可能之前分配过了
             boolean needScheduling = cluster.needsScheduling(topology);
+//            long elapsedTime = System.currentTimeMillis();
+//            System.out.println(elapsedTime);
             if (!needScheduling){
                 System.out.println("The word_count topology DOES NOT NEED scheduling！");
             } else {
@@ -102,20 +104,23 @@ public class MyTestScheduler implements IScheduler{
     public static void main(String[] args) {
 
         //List<String> componentList = (List<String>) topology.getConf().get("components");
-        int[] arr = {2,5,3,4,5,6};
+        final Random rand = new Random();
+        long currentTime = System.currentTimeMillis();
+        int [] arr = new int[10000];
+        for (int i = 0; i < 10000; i++) {
+            arr[i]=rand.nextInt(10);
+            System.out.println(arr[i]);
+        }
         HashSet executors = new HashSet();
-        for (int i = 0; i < arr.length; i++) {
-            //System.out.println(arr[i]);
-//            if(!executors.add(arr[i])){
-//                System.out.println(arr[i]);
-//            }
+        for (int i = 0; i < 10000; i++) {
             executors.add(arr[i]);
         }
         System.out.println(executors);
+        long elapsedTime = System.currentTimeMillis();
+        long time = elapsedTime-currentTime;
+        Double Time = Double.parseDouble(Long.toString(time));
+        System.out.println("执行时间："+Time+"毫秒"+Time/(double)1000+"秒");
 
-//        for (int i = 0; i < arr ; i++) {
-//
-//        }
     }
 
 
