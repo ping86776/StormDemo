@@ -26,7 +26,7 @@ public class MyTestScheduler implements IScheduler{
     public void schedule (Topologies topologies, Cluster cluster){
 
         System.out.println("MyTestScheduler: begin scheduling");
-        logger.info("MyTestScheduler");
+        logger.info("mytestscheduler");
         logger.info("+++++++++++++++++++++++++++");
 
         //获得拓扑的所有信息，確定Topology是否提交到集群了 topologyDetails不为null说明已经提交

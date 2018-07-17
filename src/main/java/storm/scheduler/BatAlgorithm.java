@@ -68,7 +68,6 @@ public class BatAlgorithm {
         }
 
         // Initialize X
-        //产生N个D维的解
         //HashSet executors = new HashSet();
         for ( int i = 0; i < N; i++ ){
             for ( int j = 0; j < D; j++ ){
