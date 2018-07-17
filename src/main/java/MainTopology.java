@@ -49,6 +49,7 @@ public class MainTopology {
     public static void main(String[] args) {
         MainTopology topology = new MainTopology();
         topology.runLocal(60);
+        System.out.println("Õÿ∆À–≈œ¢£∫++++++++++++++"+topology.config);
         //topology.runCluster();
     }
 }
