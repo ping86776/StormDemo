@@ -106,16 +106,38 @@ public class MyTestScheduler implements IScheduler{
         //List<String> componentList = (List<String>) topology.getConf().get("components");
         final Random rand = new Random();
         long currentTime = System.currentTimeMillis();
-        int [] arr = new int[10000];
-        for (int i = 0; i < 10000; i++) {
-            arr[i]=rand.nextInt(10);
-            System.out.println(arr[i]);
+//        int [] arr = new int[10000];
+//        for (int i = 0; i < 10000; i++) {
+//            arr[i]=rand.nextInt(10);
+//            System.out.println(arr[i]);
+//        }
+//        HashSet executors = new HashSet();
+//        for (int i = 0; i < 10000; i++) {
+//            executors.add(arr[i]);
+//        }
+//        System.out.println(executors);
+        HashMap<String,Object> map  = new HashMap<String, Object>();
+        map.put("name","zhangsan");
+        map.put("sex","ÄÐ");
+        map.put("age","22");
+        map.put("high","170");
+        System.out.println(map.values());
+        List<String> list = new ArrayList<String>();
+        for (String key : map.keySet()){
+            list.add(key);
         }
-        HashSet executors = new HashSet();
-        for (int i = 0; i < 10000; i++) {
-            executors.add(arr[i]);
+//        System.out.println(list);
+//        System.out.println(list.get(0));
+        HashMap<String,Object> maps = new HashMap<String, Object>();
+        HashMap<String,Object> map2 = new HashMap<String, Object>();
+        for (String lists : list){
+            String idx = (String)maps.get(lists);
+            System.out.println(maps.get(lists));
+            map2.put(idx,1);
         }
-        System.out.println(executors);
+        list.get(1);
+        System.out.println(map2);
+        //System.out.println(map.keySet().getClass().toString());
         long elapsedTime = System.currentTimeMillis();
         long time = elapsedTime-currentTime;
         Double Time = Double.parseDouble(Long.toString(time));
