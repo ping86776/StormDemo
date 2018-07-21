@@ -1,0 +1,4 @@
+worker-id: a1126dbb-6c5c-4d6a-b873-27d3defbf71b
+logs.users: []
+logs.groups: []
+topology.submitter.user: Ping
